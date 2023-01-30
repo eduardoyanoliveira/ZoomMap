@@ -1,0 +1,39 @@
+﻿using ZoomMap.Domain.Common.Models;
+using ZoomMap.Domain.ServiceAggregate.Entities;
+using ZoomMap.Domain.ServiceAggregate.ValueObjects;
+
+namespace ZoomMap.Domain.ServiceAggregate
+{
+    public sealed class Service : AggregateRoot<ServiceId>
+    {
+        private List<ServiceProduct> _serviceProducts = new();
+        public IReadOnlyList<ServiceProduct> ServiceProducts => _serviceProducts.AsReadOnly();
+
+        public string Name { get; }
+
+        public double ServicePrice { get; }
+
+        private Service(
+            ServiceId serviceId,
+            string name,
+            double servicePrice
+        ) 
+            : base(serviceId) 
+        { 
+            Name = name;
+            ServicePrice = servicePrice;
+        }
+
+        public static Service Create(
+            string name,
+            double servicePrice
+        )
+        {
+            return new Service(
+                ServiceId.CreateUnique(),
+                name,
+                servicePrice
+            );
+        }
+    }
+}
