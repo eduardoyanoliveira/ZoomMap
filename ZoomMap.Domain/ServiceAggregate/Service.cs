@@ -16,23 +16,27 @@ namespace ZoomMap.Domain.ServiceAggregate
         private Service(
             ServiceId serviceId,
             string name,
-            double servicePrice
+            double servicePrice,
+            List<ServiceProduct>? serviceProducts
         ) 
             : base(serviceId) 
         { 
             Name = name;
             ServicePrice = servicePrice;
+            _serviceProducts = serviceProducts ?? new();
         }
 
         public static Service Create(
             string name,
-            double servicePrice
+            double servicePrice,
+            List<ServiceProduct>? serviceProducts
         )
         {
             return new Service(
                 ServiceId.CreateUnique(),
                 name,
-                servicePrice
+                servicePrice,
+                serviceProducts
             );
         }
     }

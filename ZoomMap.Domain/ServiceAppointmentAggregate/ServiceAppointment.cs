@@ -23,7 +23,8 @@ namespace ZoomMap.Domain.ServiceAppointmentAggregate
             CustomerId customerId,
             DateTime appointmentDateTime,
             DateTime? executionDateTime,
-            string obs
+            string obs,
+            List<DetachedProduct>? detachedProducts
         ) 
             : base(serviceAppointmentId)
         {
@@ -32,6 +33,7 @@ namespace ZoomMap.Domain.ServiceAppointmentAggregate
             AppointmentDateTime = appointmentDateTime;
             ExecutionDateTime = executionDateTime;
             Obs = obs;
+            _detachedProducts = detachedProducts ?? new();
         }
 
         public static ServiceAppointment Create(
@@ -39,7 +41,8 @@ namespace ZoomMap.Domain.ServiceAppointmentAggregate
             CustomerId customerId,
             DateTime appointmentDateTime,
             DateTime? executionDateTime,
-            string obs
+            string obs,
+            List<DetachedProduct>? detachedProducts
         )
         {
             return new ServiceAppointment(
@@ -48,7 +51,9 @@ namespace ZoomMap.Domain.ServiceAppointmentAggregate
                 customerId,
                 appointmentDateTime,
                 executionDateTime,
-                obs);
+                obs,
+                detachedProducts
+            );
         }
     }
 }

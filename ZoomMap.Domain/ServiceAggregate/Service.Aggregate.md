@@ -1,14 +1,12 @@
 ﻿# Domain Aggregates
 
-## Service
+## Seller
 
 ```csharp
-class Service
+class Seller
 {
-    Service Create();
-    void AddServiceProduct(ServiceProduct serviceProduct);
-    void RemoveServiceProduct(ServiceProduct serviceProduct);
-    void UpdateServiceProduct(ServiceProduct serviceProduct);
+    Seller Create();
+    void Update(Seller seller);
     // TODO: Add remaining methods
 }
 ```
@@ -16,15 +14,10 @@ class Service
 ```json
 {
     "id": { "value": "00000000-0000-0000-0000-000000000000" },
-    "name": "Test Service",
-    "servicePrice": 100.00,
-    "serviceProducts": [
-        {
-            "id": { "value": "00000000-0000-0000-0000-000000000000" },
-            "ProductId": { "value": "00000000-0000-0000-0000-000000000000" },
-            "quantity": 9,
-            "price": 40.75,
-        }
-    ],
+    "name": "Juan",
+    "surname": "Thompsom",
+    "birthDate": "1995-07-23T00:00:00.0000000Z",
+    "email": "thompjuan@server.com",
+    "userId": { "value": "00000000-0000-0000-0000-000000000000" }
 }
 ```

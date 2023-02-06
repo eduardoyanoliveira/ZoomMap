@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomMap.Contracts", "ZoomMap.Contracts\ZoomMap.Contracts.csproj", "{674A2FF0-81E5-47B5-94C5-224C7E2E6329}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZoomMap.Contracts", "ZoomMap.Contracts\ZoomMap.Contracts.csproj", "{674A2FF0-81E5-47B5-94C5-224C7E2E6329}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomMap.Application", "ZoomMap.Application\ZoomMap.Application.csproj", "{443F2DB3-3E5B-4313-8629-3759EC0ADD08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZoomMap.Application", "ZoomMap.Application\ZoomMap.Application.csproj", "{443F2DB3-3E5B-4313-8629-3759EC0ADD08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomMap.Infra", "ZoomMap.Infra\ZoomMap.Infra.csproj", "{39D10DBD-0F84-4B0E-95EB-921A221F91DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZoomMap.Infra", "ZoomMap.Infra\ZoomMap.Infra.csproj", "{39D10DBD-0F84-4B0E-95EB-921A221F91DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomMap.Domain", "ZoomMap.Domain\ZoomMap.Domain.csproj", "{5ACDDF92-ACF1-4EEF-9E4B-B3A90D0785FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZoomMap.Domain", "ZoomMap.Domain\ZoomMap.Domain.csproj", "{5ACDDF92-ACF1-4EEF-9E4B-B3A90D0785FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZoomMap.Api", "ZoomMap.Api\ZoomMap.Api.csproj", "{B7C88A2C-CF7A-4D7C-AE1E-AD3DD4CFADCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZoomMap.Api", "ZoomMap.Api\ZoomMap.Api.csproj", "{B7C88A2C-CF7A-4D7C-AE1E-AD3DD4CFADCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2F0BE369-907B-4A71-8945-3CFC248F451B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Architecture.Tests", "Architecture.Tests\Architecture.Tests.csproj", "{C278A278-3CE5-40E9-A5FB-C4639D8A41B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +43,16 @@ Global
 		{B7C88A2C-CF7A-4D7C-AE1E-AD3DD4CFADCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7C88A2C-CF7A-4D7C-AE1E-AD3DD4CFADCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7C88A2C-CF7A-4D7C-AE1E-AD3DD4CFADCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C278A278-3CE5-40E9-A5FB-C4639D8A41B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C278A278-3CE5-40E9-A5FB-C4639D8A41B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C278A278-3CE5-40E9-A5FB-C4639D8A41B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C278A278-3CE5-40E9-A5FB-C4639D8A41B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C278A278-3CE5-40E9-A5FB-C4639D8A41B5} = {2F0BE369-907B-4A71-8945-3CFC248F451B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B15BAE3-117F-47A0-B1EF-2A844E8FA3DF}
