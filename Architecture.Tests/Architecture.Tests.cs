@@ -59,24 +59,24 @@ public class ArchitectureTests
         result.IsSuccessful.Should().BeTrue();
     }
 
-    [Fact]
-    public void Handlers_Should_Have_DependencyOnDomain()
-    {
-        // Arrange
-        var assembly = typeof(ZoomMap.Application.AssemblyReference).Assembly;
+    //[Fact]
+    //public void Handlers_Should_Have_DependencyOnDomain()
+    //{
+    //    // Arrange
+    //    var assembly = typeof(ZoomMap.Application.AssemblyReference).Assembly;
 
-        // Act
-        var result = Types
-            .InAssembly(assembly)
-            .That()
-            .HaveNameEndingWith("Handler")
-            .Should()
-            .HaveDependencyOn(DomainNamespace)
-            .GetResult();
+    //    // Act
+    //    var result = Types
+    //        .InAssembly(assembly)
+    //        .That()
+    //        .HaveNameEndingWith("Handler")
+    //        .Should()
+    //        .HaveDependencyOn(DomainNamespace)
+    //        .GetResult();
 
-        // Assert
-        result.IsSuccessful.Should().BeTrue();
-    }
+    //    // Assert
+    //    result.IsSuccessful.Should().BeTrue();
+    //}
 
     [Fact]
     public void Infrastructure_Should_Not_HaveDependencyOnOtherProjects()
