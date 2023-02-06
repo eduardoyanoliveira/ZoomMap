@@ -9,7 +9,7 @@ namespace ZoomMap.Domain.Common.ValueObjects
 
         public const int MaxLenght = 11;
 
-        public CPF(string value) 
+        private CPF(string value) 
         {
             Value = value;
         }
