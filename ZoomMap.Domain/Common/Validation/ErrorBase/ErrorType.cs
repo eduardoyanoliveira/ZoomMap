@@ -1,4 +1,4 @@
-﻿namespace ZoomMap.Domain.Common.Validation.Base
+﻿namespace ZoomMap.Domain.Common.Validation.ErrorBase
 {
     public enum ErrorType
     {

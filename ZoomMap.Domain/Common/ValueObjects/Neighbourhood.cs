@@ -1,5 +1,5 @@
 ﻿using ZoomMap.Domain.Common.Models;
-using ZoomMap.Domain.Common.Validation.Base;
+using ZoomMap.Domain.Common.Validation.ErrorBase;
 
 namespace ZoomMap.Domain.Common.ValueObjects
 {

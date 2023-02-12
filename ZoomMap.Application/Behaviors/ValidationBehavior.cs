@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using MediatR;
-using ZoomMap.Domain.Common.Validation.Base;
+using ZoomMap.Domain.Common.Validation.ErrorBase;
 
 namespace ZoomMap.Application.Behaviors
 {

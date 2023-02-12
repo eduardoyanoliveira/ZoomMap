@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using ZoomMap.Application.Authentication.Common;
-using ZoomMap.Domain.Common.Validation.Base;
+using ZoomMap.Domain.Common.Validation.ErrorBase;
 
 namespace ZoomMap.Application.Authentication.Commands
 {

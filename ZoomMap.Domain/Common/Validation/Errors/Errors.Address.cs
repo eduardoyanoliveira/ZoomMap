@@ -1,4 +1,4 @@
-﻿using ZoomMap.Domain.Common.Validation.Base;
+﻿using ZoomMap.Domain.Common.Validation.ErrorBase;
 
 namespace ZoomMap.Domain.Validation.Errors
 {
