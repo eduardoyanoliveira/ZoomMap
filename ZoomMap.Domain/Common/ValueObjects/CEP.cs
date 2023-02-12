@@ -16,7 +16,7 @@ namespace ZoomMap.Domain.Common.ValueObjects
         public static Result<CEP> Create(string code)
         {
             if (IsValid(code))
-                return Result<CEP>.Fail(Errors.CEP.InvalidPostalCode);
+                return Result<CEP>.Fail(Errors.CEP.InvalidPostalCodePattern);
 
             return Result<CEP>.Ok(new CEP(code));
         }
