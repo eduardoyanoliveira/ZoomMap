@@ -1,5 +1,6 @@
 ﻿using ZoomMap.Domain.Common.Models;
 using ZoomMap.Domain.Common.Validation.ErrorBase;
+using ZoomMap.Domain.Common.Validation.ValidationMediators;
 
 namespace ZoomMap.Domain.Common.ValueObjects
 {
@@ -7,6 +8,8 @@ namespace ZoomMap.Domain.Common.ValueObjects
     {
         public string Name { get; }
 
+        private static readonly NeighbourhoodValidationMediator validationMediator = 
+            NeighbourhoodValidationMediator.Create();
         private Neighbourhood(string name)
         {
             Name = name;

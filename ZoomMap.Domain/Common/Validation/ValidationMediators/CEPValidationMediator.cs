@@ -1,33 +1,34 @@
 ﻿using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.Common.Validation.ValidationBase;
 using ZoomMap.Domain.Common.Validation.ValidationRules.CEPValidationRules;
+using ZoomMap.Domain.Common.ValueObjects;
 
 namespace ZoomMap.Domain.Common.Validation.ValidationMediators
 {
-    public class CEPValidationMediator<CEP>
+    public class CEPValidationMediator
     {
-        private readonly ValidationMediator<CEP> _mediator;
+        private readonly ValidationMediator<CEP> _validationMediator;
 
         private CEPValidationMediator(ValidationMediator<CEP> mediator)
         {
-            _mediator = mediator;
+            _validationMediator = mediator;
         }
 
-        public static CEPValidationMediator<CEP> Create()
+        public static CEPValidationMediator Create()
         {
             ValidationMediator<CEP> mediator = new ValidationMediator<CEP>(
                 new List<IValidationRule<CEP>>
                 {
-                (IValidationRule<CEP>)new CepPatternValidationRule()
+                    (IValidationRule<CEP>)new CepPatternValidationRule()
                 }
             );
 
-            return new CEPValidationMediator<CEP>(mediator);
+            return new CEPValidationMediator(mediator);
         }
 
         public Result<CEP> Validate(CEP entity)
         {
-            return _mediator.Validate(entity);
+            return _validationMediator.Validate(entity);
         }
     }
 }

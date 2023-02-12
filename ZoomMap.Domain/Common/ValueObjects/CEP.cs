@@ -8,7 +8,8 @@ namespace ZoomMap.Domain.Common.ValueObjects
     {
         public string Code { get; }
 
-        private static readonly CEPValidationMediator<CEP> _validationMediator = CEPValidationMediator<CEP>.Create();
+        private static readonly CEPValidationMediator _validationMediator = 
+            CEPValidationMediator.Create();
 
         private CEP(string code)
         {
