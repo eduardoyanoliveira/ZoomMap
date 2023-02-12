@@ -4,7 +4,7 @@ using ZoomMap.Application.Interfaces.Authentication;
 using ZoomMap.Application.Interfaces.Data;
 using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.UserAggregate;
-using ZoomMap.Domain.Validation.Errors;
+using ZoomMap.Domain.Common.Validation.Errors;
 
 namespace ZoomMap.Application.Authentication.Commands
 {

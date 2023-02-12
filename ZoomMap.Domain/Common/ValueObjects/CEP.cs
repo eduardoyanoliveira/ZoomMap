@@ -1,12 +1,14 @@
 ﻿using ZoomMap.Domain.Common.Models;
 using ZoomMap.Domain.Common.Validation.ErrorBase;
-using ZoomMap.Domain.Validation.Errors;
+using ZoomMap.Domain.Common.Validation.ValidationMediators;
 
 namespace ZoomMap.Domain.Common.ValueObjects
 {
     public sealed class CEP : ValueObject
     {
         public string Code { get; }
+
+        private static readonly CEPValidationMediator<CEP> _validationMediator = CEPValidationMediator<CEP>.Create();
 
         private CEP(string code)
         {
@@ -15,15 +17,9 @@ namespace ZoomMap.Domain.Common.ValueObjects
 
         public static Result<CEP> Create(string code)
         {
-            if (IsValid(code))
-                return Result<CEP>.Fail(Errors.CEP.InvalidPostalCodePattern);
+            CEP cep = new CEP(code);
 
-            return Result<CEP>.Ok(new CEP(code));
-        }
-
-        private static bool IsValid(string code)
-        {
-            return code.Length == 8 && int.TryParse(code, out int n);
+            return _validationMediator.Validate(cep);
         }
 
         public override IEnumerable<object> GetEqualityComponents()

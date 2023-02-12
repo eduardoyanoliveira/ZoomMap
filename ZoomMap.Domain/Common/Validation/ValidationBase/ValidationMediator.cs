@@ -4,7 +4,7 @@ namespace ZoomMap.Domain.Common.Validation.ValidationBase
 {
     public class ValidationMediator<T>
     {
-        private readonly IEnumerable<IValidationRule<T>> _validations;
+        private readonly  IEnumerable<IValidationRule<T>> _validations;
 
         public ValidationMediator(IEnumerable<IValidationRule<T>> validations)
         {

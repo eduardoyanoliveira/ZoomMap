@@ -1,6 +1,6 @@
 ﻿using ZoomMap.Domain.Common.Models;
 using ZoomMap.Domain.Common.Validation.ErrorBase;
-using ZoomMap.Domain.Validation.Errors;
+using ZoomMap.Domain.Common.Validation.Errors;
 
 namespace ZoomMap.Domain.Common.ValueObjects
 {

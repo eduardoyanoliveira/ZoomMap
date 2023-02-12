@@ -1,6 +1,6 @@
 ﻿using ZoomMap.Domain.Common.Validation.ErrorBase;
 
-namespace ZoomMap.Domain.Validation.Errors
+namespace ZoomMap.Domain.Common.Validation.Errors
 {
     public static partial class Errors
     {
