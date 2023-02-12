@@ -9,7 +9,7 @@ namespace ZoomMap.Domain.Common.Validation.ValidationRules.CEPValidationRules
     public class CepPatternValidationRule : IValidationRule<CEP>
     {
         private readonly Error _error;
-        private const string _pattern = @"^[0-9]{5}-[0-9]{3}$";
+        private const string _pattern = @"^\d{8}$";
 
         public CepPatternValidationRule()
         {
