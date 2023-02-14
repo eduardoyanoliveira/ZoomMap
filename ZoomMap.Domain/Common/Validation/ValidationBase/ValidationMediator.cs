@@ -2,7 +2,7 @@
 
 namespace ZoomMap.Domain.Common.Validation.ValidationBase
 {
-    public class ValidationMediator<T>
+    public class ValidationMediator<T> : IValidationMediator<T> 
     {
         private readonly  IEnumerable<IValidationRule<T>> _validations;
 
@@ -11,7 +11,7 @@ namespace ZoomMap.Domain.Common.Validation.ValidationBase
             _validations = validations;
         }
 
-        public Result<T> Validate(T entity)
+        public Result<T> ValidateBatch(T entity)
         {
             foreach (var validation in _validations)
             {

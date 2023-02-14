@@ -1,6 +1,7 @@
 ﻿using ZoomMap.Domain.Common.Models;
 using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.Common.Validation.ValidationMediators;
+using static ZoomMap.Domain.Common.Validation.Errors.Errors;
 
 namespace ZoomMap.Domain.Common.ValueObjects
 {
@@ -8,7 +9,7 @@ namespace ZoomMap.Domain.Common.ValueObjects
     {
         public string Name { get; }
 
-        private static readonly NeighbourhoodValidationMediator validationMediator = 
+        private static readonly NeighbourhoodValidationMediator _validationMediator = 
             NeighbourhoodValidationMediator.Create();
         private Neighbourhood(string name)
         {
@@ -16,7 +17,9 @@ namespace ZoomMap.Domain.Common.ValueObjects
         }
         public static Result<Neighbourhood> Create(string name)
         {
-            return Result<Neighbourhood>.Ok(new Neighbourhood(name));
+            Neighbourhood neighbourhood = new Neighbourhood(name);
+
+            return _validationMediator.ValidateBatch(neighbourhood);
         }
 
         public override IEnumerable<object> GetEqualityComponents()

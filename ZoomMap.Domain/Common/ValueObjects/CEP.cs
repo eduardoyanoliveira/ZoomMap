@@ -1,5 +1,6 @@
 ﻿using ZoomMap.Domain.Common.Models;
 using ZoomMap.Domain.Common.Validation.ErrorBase;
+using ZoomMap.Domain.Common.Validation.ValidationBase;
 using ZoomMap.Domain.Common.Validation.ValidationMediators;
 
 namespace ZoomMap.Domain.Common.ValueObjects
@@ -8,7 +9,7 @@ namespace ZoomMap.Domain.Common.ValueObjects
     {
         public string Code { get; }
 
-        private static readonly CEPValidationMediator _validationMediator = 
+        private static readonly IValidationMediator<CEP> _validationMediator = 
             CEPValidationMediator.Create();
 
         private CEP(string code)
@@ -20,7 +21,7 @@ namespace ZoomMap.Domain.Common.ValueObjects
         {
             CEP cep = new CEP(code);
 
-            return _validationMediator.Validate(cep);
+            return _validationMediator.ValidateBatch(cep);
         }
 
         public override IEnumerable<object> GetEqualityComponents()

@@ -5,7 +5,7 @@ using ZoomMap.Domain.Common.ValueObjects;
 
 namespace ZoomMap.Domain.Common.Validation.ValidationMediators
 {
-    public class CEPValidationMediator
+    public class CEPValidationMediator : IValidationMediator<CEP>
     {
         private readonly ValidationMediator<CEP> _validationMediator;
 
@@ -19,16 +19,16 @@ namespace ZoomMap.Domain.Common.Validation.ValidationMediators
             ValidationMediator<CEP> mediator = new ValidationMediator<CEP>(
                 new List<IValidationRule<CEP>>
                 {
-                    (IValidationRule<CEP>)new CepPatternValidationRule()
+                    new CepPatternValidationRule()
                 }
             );
 
             return new CEPValidationMediator(mediator);
         }
 
-        public Result<CEP> Validate(CEP entity)
+        public Result<CEP> ValidateBatch(CEP entity)
         {
-            return _validationMediator.Validate(entity);
+            return _validationMediator.ValidateBatch(entity);
         }
     }
 }

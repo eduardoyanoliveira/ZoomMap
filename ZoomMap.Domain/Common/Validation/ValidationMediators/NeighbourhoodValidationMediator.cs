@@ -5,7 +5,7 @@ using ZoomMap.Domain.Common.ValueObjects;
 
 namespace ZoomMap.Domain.Common.Validation.ValidationMediators
 {
-    public class NeighbourhoodValidationMediator
+    public class NeighbourhoodValidationMediator : IValidationMediator<Neighbourhood>
     {
         private readonly ValidationMediator<Neighbourhood> _validationMediator;
 
@@ -20,10 +20,7 @@ namespace ZoomMap.Domain.Common.Validation.ValidationMediators
                 new List<IValidationRule<Neighbourhood>>
                 {
                     new NotEmptyValidationRule<Neighbourhood>(
-                        x => x.Name , Error.Validation(
-                            "Neighbourhood.NotEmptyName", 
-                            "The neighbourhood name can be empty"
-                        )
+                        x => x.Name , Errors.Errors.Neighbourhood.NotEmptyName
                     )
                 }    
             );
@@ -31,9 +28,9 @@ namespace ZoomMap.Domain.Common.Validation.ValidationMediators
             return new NeighbourhoodValidationMediator(validationMediator);
         }
 
-        public Result<Neighbourhood> Validate(Neighbourhood entity)
+        public Result<Neighbourhood> ValidateBatch(Neighbourhood entity)
         {
-            return _validationMediator.Validate(entity);
+            return _validationMediator.ValidateBatch(entity);
         }
     }
 }
