@@ -1,34 +1,24 @@
 ﻿using ZoomMap.Domain.Common.Models;
 using ZoomMap.Domain.Common.Validation.ErrorBase;
-using ZoomMap.Domain.Common.Validation.Errors;
+using ZoomMap.Domain.Common.Validation.ValidationMediators;
 
 namespace ZoomMap.Domain.Common.ValueObjects
 {
     public sealed class CPF : ValueObject
     {
-
-        public const int MaxLenght = 11;
-
         private CPF(string value) 
         {
             Value = value;
         }
 
         public string Value { get; }
+        private static readonly CPFValidationMediator _validationMediator 
+            = CPFValidationMediator.Create();
 
         public static Result<CPF> Create(string value)
         {
-            if (String.IsNullOrWhiteSpace(value))
-            {
-                return Result<CPF>.Fail(Errors.CPF.EmptyCPF);
-            }
-
-            if(value.Length > MaxLenght)
-            {
-                return Result<CPF>.Fail(Errors.CPF.TooLong);
-            }
-
-            return Result<CPF>.Ok(new CPF(value));
+            CPF CPF = new CPF(value);
+            return _validationMediator.ValidateBatch(CPF);
         }
 
         public override IEnumerable<object> GetEqualityComponents()
