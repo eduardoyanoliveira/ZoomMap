@@ -11,7 +11,7 @@ namespace ZoomMap.Domain.Common.Validation.Errors
                 description: "The Location number must be greater than zero!"
             );
 
-            public static Error InvalidStreetName = Error.Validation(
+            public static Error NullOrEmptyStreetName = Error.Validation(
                 code: "Address.InvalidStreetName",
                 description: "The street name can not be empty!"
             );

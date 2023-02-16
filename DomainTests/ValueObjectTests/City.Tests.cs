@@ -1,4 +1,5 @@
 ﻿using ZoomMap.Domain.Common.ValueObjects;
+using ZoomMap.Domain.Common.Validation.Errors;
 
 namespace DomainTests.ValueObjectTests
 {
@@ -28,6 +29,7 @@ namespace DomainTests.ValueObjectTests
 
             // Assert
             Assert.False(result.IsSuccess);
+            Assert.Equal(Errors.City.NotEmptyName, result.Error);
         }
 
         [Fact]

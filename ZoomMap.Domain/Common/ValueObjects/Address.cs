@@ -1,6 +1,7 @@
 ﻿using ZoomMap.Domain.Common.Models;
 using ZoomMap.Domain.Common.Validation.ErrorBase;
-using ZoomMap.Domain.Common.Validation.Errors;
+using ZoomMap.Domain.Common.Validation.ValidationBase;
+using ZoomMap.Domain.Common.Validation.ValidationMediators;
 
 namespace ZoomMap.Domain.Common.ValueObjects
 {
@@ -11,6 +12,9 @@ namespace ZoomMap.Domain.Common.ValueObjects
         public Neighbourhood Neighbourhood { get; }
         public string Street { get; }
         public City City { get; }
+
+        private static readonly IValidationMediator<Address> _validationMediator 
+            = AddressValidationMediator.Create();
 
         private Address(
             int locationNumber,
@@ -35,14 +39,7 @@ namespace ZoomMap.Domain.Common.ValueObjects
             City city
         )
         {
-            var result = CreateValidation(locationNumber, street);
-
-            if (result.IsFailure)
-            {
-                return Result<Address>.Fail(result.Error);
-            }
-
-            var address = new Address(
+            Address address = new Address(
                 locationNumber,
                 cep,
                 neighbourhood,
@@ -50,34 +47,16 @@ namespace ZoomMap.Domain.Common.ValueObjects
                 city
             );
 
-            return Result<Address>.Ok(address);
-        }
-
-        private static Result<bool> CreateValidation(
-            int locationNumber,
-            string street
-        )
-        {
-            if(locationNumber <= 0)
-            {
-                return Result<bool>.Fail(Errors.Address.InvalidLocationNumber);
-            }
-
-            if (String.IsNullOrWhiteSpace(street))
-            {
-                return Result<bool>.Fail(Errors.Address.InvalidStreetName);
-            }
-
-            return Result<bool>.Ok(true);
+            return _validationMediator.ValidateBatch(address);
         }
 
         public override IEnumerable<object> GetEqualityComponents()
         {
             yield return LocationNumber;
-            yield return CEP;
-            yield return Neighbourhood;
+            yield return CEP.GetHashCode();
+            yield return Neighbourhood.GetHashCode();
             yield return Street;
-            yield return City;
+            yield return City.GetHashCode();
         }
     }
 }
