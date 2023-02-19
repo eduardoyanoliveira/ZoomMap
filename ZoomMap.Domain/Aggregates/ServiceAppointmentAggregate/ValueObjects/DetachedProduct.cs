@@ -1,7 +1,7 @@
 ﻿using ZoomMap.Domain.Common.Models;
 using ZoomMap.Domain.Entities.ProductEntity.ValueObjects;
 
-namespace ZoomMap.Domain.ServiceAppointmentAggregate.ValueObjects
+namespace ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate.ValueObjects
 {
     public sealed class DetachedProduct : ValueObject
     {

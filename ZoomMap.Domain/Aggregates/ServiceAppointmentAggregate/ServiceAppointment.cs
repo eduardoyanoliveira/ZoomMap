@@ -1,9 +1,9 @@
 ﻿using ZoomMap.Domain.Common.Models;
 using ZoomMap.Domain.Entities.CustomerEntity.ValueObjects;
 using ZoomMap.Domain.Entities.ServiceEntity.ValueObjects;
-using ZoomMap.Domain.ServiceAppointmentAggregate.ValueObjects;
+using ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate.ValueObjects;
 
-namespace ZoomMap.Domain.ServiceAppointmentAggregate
+namespace ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate
 {
     public sealed class ServiceAppointment : AggregateRoot<ServiceAppointmentId>
     {
@@ -11,10 +11,10 @@ namespace ZoomMap.Domain.ServiceAppointmentAggregate
         public IReadOnlyList<DetachedProduct> DetachedProducts => _detachedProducts.AsReadOnly();
 
         public ServiceId ServiceId { get; }
-        public CustomerId CustomerId { get;  }
+        public CustomerId CustomerId { get; }
         public DateTime AppointmentDateTime { get; }
         public DateTime? ExecutionDateTime { get; }
-        public string Obs { get;  }
+        public string Obs { get; }
 
         private ServiceAppointment(
             ServiceAppointmentId serviceAppointmentId,
@@ -24,7 +24,7 @@ namespace ZoomMap.Domain.ServiceAppointmentAggregate
             DateTime? executionDateTime,
             string obs,
             List<DetachedProduct>? detachedProducts
-        ) 
+        )
             : base(serviceAppointmentId)
         {
             ServiceId = serviceId;

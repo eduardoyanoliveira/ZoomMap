@@ -1,6 +1,6 @@
 ﻿using ZoomMap.Domain.Common.Models;
 
-namespace ZoomMap.Domain.ServiceAppointmentAggregate.ValueObjects
+namespace ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate.ValueObjects
 {
     public sealed class ServiceAppointmentId : ValueObject
     {
