@@ -1,9 +1,11 @@
 ﻿using ZoomMap.Domain.Common.Models;
 using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.Common.Validation.ValidationBase;
-using ZoomMap.Domain.Common.Validation.ValidationMediators;
+using ZoomMap.Domain.Common.ValueObjects.CEPValueObject;
+using ZoomMap.Domain.Common.ValueObjects.CityValueObject;
+using ZoomMap.Domain.Common.ValueObjects.NeighbourhoodValueObject;
 
-namespace ZoomMap.Domain.Common.ValueObjects
+namespace ZoomMap.Domain.Common.ValueObjects.AddressValueObject
 {
     public sealed class Address : ValueObject
     {
@@ -13,7 +15,7 @@ namespace ZoomMap.Domain.Common.ValueObjects
         public string Street { get; }
         public City City { get; }
 
-        private static readonly IValidationMediator<Address> _validationMediator 
+        private static readonly IValidationMediator<Address> _validationMediator
             = AddressValidationMediator.Create();
 
         private Address(
@@ -22,11 +24,11 @@ namespace ZoomMap.Domain.Common.ValueObjects
             Neighbourhood neighbourhood,
             string street,
             City city
-        ) 
+        )
         {
             LocationNumber = locationNumber;
             CEP = cep;
-            Neighbourhood= neighbourhood;
+            Neighbourhood = neighbourhood;
             Street = street;
             City = city;
         }

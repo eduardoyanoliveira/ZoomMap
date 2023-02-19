@@ -1,6 +1,9 @@
 ﻿using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.Common.Validation.Errors;
-using ZoomMap.Domain.Common.ValueObjects;
+using ZoomMap.Domain.Common.ValueObjects.AddressValueObject;
+using ZoomMap.Domain.Common.ValueObjects.CEPValueObject;
+using ZoomMap.Domain.Common.ValueObjects.CityValueObject;
+using ZoomMap.Domain.Common.ValueObjects.NeighbourhoodValueObject;
 
 namespace DomainTests.ValueObjectTests
 {

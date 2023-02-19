@@ -1,5 +1,5 @@
 ﻿using ZoomMap.Domain.Common.Validation.Errors;
-using ZoomMap.Domain.Common.ValueObjects;
+using ZoomMap.Domain.Common.ValueObjects.CPFValueObject;
 
 namespace DomainTests.ValueObjectTests
 {

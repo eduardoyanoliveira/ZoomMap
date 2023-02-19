@@ -1,9 +1,9 @@
 ﻿using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.Common.Validation.GenericValidationRules;
 using ZoomMap.Domain.Common.Validation.ValidationBase;
-using ZoomMap.Domain.Common.ValueObjects;
+using ZoomMap.Domain.Common.Validation.Errors;
 
-namespace ZoomMap.Domain.Common.Validation.ValidationMediators
+namespace ZoomMap.Domain.Common.ValueObjects.AddressValueObject
 {
     public class AddressValidationMediator : IValidationMediator<Address>
     {
@@ -20,10 +20,10 @@ namespace ZoomMap.Domain.Common.Validation.ValidationMediators
                 new List<IValidationRule<Address>>
                 {
                     new NotEmptyValidationRule<Address>(
-                        x => x.Street , Errors.Errors.Address.NullOrEmptyStreetName
+                        x => x.Street , Errors.Address.NullOrEmptyStreetName
                     ),
                     new GreaterThanZeroValidationRule<Address>(
-                        x => x.LocationNumber, Errors.Errors.Address.InvalidLocationNumber
+                        x => x.LocationNumber, Errors.Address.InvalidLocationNumber
                     ),
                 }
             );

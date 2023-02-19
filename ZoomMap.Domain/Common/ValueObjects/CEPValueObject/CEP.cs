@@ -1,15 +1,14 @@
 ﻿using ZoomMap.Domain.Common.Models;
 using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.Common.Validation.ValidationBase;
-using ZoomMap.Domain.Common.Validation.ValidationMediators;
 
-namespace ZoomMap.Domain.Common.ValueObjects
+namespace ZoomMap.Domain.Common.ValueObjects.CEPValueObject
 {
     public sealed class CEP : ValueObject
     {
         public string Code { get; }
 
-        private static readonly IValidationMediator<CEP> _validationMediator = 
+        private static readonly IValidationMediator<CEP> _validationMediator =
             CEPValidationMediator.Create();
 
         private CEP(string code)

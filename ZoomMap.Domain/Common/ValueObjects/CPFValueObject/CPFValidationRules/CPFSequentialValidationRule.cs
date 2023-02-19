@@ -1,12 +1,12 @@
 ﻿using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.Common.Validation.ValidationBase;
-using ZoomMap.Domain.Common.ValueObjects;
+using ZoomMap.Domain.Common.Validation.Errors;
 
-namespace ZoomMap.Domain.Common.Validation.ValidationRules.CPFValidationRules
+namespace ZoomMap.Domain.Common.ValueObjects.CPFValueObject.CPFValidationRules
 {
     public class CPFSequentialValidationRule : IValidationRule<CPF>
     {
-        private Error _error = Errors.Errors.CPF.CPFSequential;
+        private Error _error = Errors.CPF.CPFSequential;
         public Result<CPF> Validate(CPF entity)
         {
             if (!IsValid(entity.Value))

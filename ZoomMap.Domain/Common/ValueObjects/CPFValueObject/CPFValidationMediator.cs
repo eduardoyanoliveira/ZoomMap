@@ -1,10 +1,10 @@
 ﻿using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.Common.Validation.GenericValidationRules;
 using ZoomMap.Domain.Common.Validation.ValidationBase;
-using ZoomMap.Domain.Common.Validation.ValidationRules.CPFValidationRules;
-using ZoomMap.Domain.Common.ValueObjects;
+using ZoomMap.Domain.Common.ValueObjects.CPFValueObject.CPFValidationRules;
+using ZoomMap.Domain.Common.Validation.Errors;
 
-namespace ZoomMap.Domain.Common.Validation.ValidationMediators
+namespace ZoomMap.Domain.Common.ValueObjects.CPFValueObject
 {
     public class CPFValidationMediator : IValidationMediator<CPF>
     {
@@ -21,7 +21,7 @@ namespace ZoomMap.Domain.Common.Validation.ValidationMediators
                 new List<IValidationRule<CPF>>
                 {
                     new NotEmptyValidationRule<CPF>(
-                        x => x.Value , Errors.Errors.CPF.EmptyCPF
+                        x => x.Value , Errors.CPF.EmptyCPF
                     ),
                     new CPFLengthValidationRule(),
                     new CPFSequentialValidationRule(),

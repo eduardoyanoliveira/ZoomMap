@@ -1,9 +1,8 @@
 ﻿using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.Common.Validation.ValidationBase;
-using ZoomMap.Domain.Common.Validation.ValidationRules.CEPValidationRules;
-using ZoomMap.Domain.Common.ValueObjects;
+using ZoomMap.Domain.Common.ValueObjects.CEPValueObject.CEPValidationRules;
 
-namespace ZoomMap.Domain.Common.Validation.ValidationMediators
+namespace ZoomMap.Domain.Common.ValueObjects.CEPValueObject
 {
     public class CEPValidationMediator : IValidationMediator<CEP>
     {

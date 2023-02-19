@@ -1,4 +1,4 @@
-﻿using ZoomMap.Domain.Common.ValueObjects;
+﻿using ZoomMap.Domain.Common.ValueObjects.NeighbourhoodValueObject;
 
 namespace DomainTests.ValueObjectTests
 {

@@ -1,12 +1,12 @@
 ﻿using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.Common.Validation.ValidationBase;
-using ZoomMap.Domain.Common.ValueObjects;
+using ZoomMap.Domain.Common.Validation.Errors;
 
-namespace ZoomMap.Domain.Common.Validation.ValidationRules.CPFValidationRules
+namespace ZoomMap.Domain.Common.ValueObjects.CPFValueObject.CPFValidationRules
 {
     internal class CPFLengthValidationRule : IValidationRule<CPF>
     {
-        private Error _error = Errors.Errors.CPF.CPFLength;
+        private Error _error = Errors.CPF.CPFLength;
         private const int REQUIRED_LENGTH = 11;
 
         public Result<CPF> Validate(CPF entity)
@@ -17,5 +17,5 @@ namespace ZoomMap.Domain.Common.Validation.ValidationRules.CPFValidationRules
             return Result<CPF>.Ok(entity);
         }
     }
-    
+
 }

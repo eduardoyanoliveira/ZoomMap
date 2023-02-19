@@ -1,15 +1,14 @@
 ﻿using ZoomMap.Domain.Common.Models;
 using ZoomMap.Domain.Common.Validation.ErrorBase;
-using ZoomMap.Domain.Common.Validation.ValidationMediators;
 using static ZoomMap.Domain.Common.Validation.Errors.Errors;
 
-namespace ZoomMap.Domain.Common.ValueObjects
+namespace ZoomMap.Domain.Common.ValueObjects.NeighbourhoodValueObject
 {
     public sealed class Neighbourhood : ValueObject
     {
         public string Name { get; }
 
-        private static readonly NeighbourhoodValidationMediator _validationMediator = 
+        private static readonly NeighbourhoodValidationMediator _validationMediator =
             NeighbourhoodValidationMediator.Create();
         private Neighbourhood(string name)
         {

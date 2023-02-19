@@ -1,9 +1,9 @@
 ﻿using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.Common.Validation.GenericValidationRules;
 using ZoomMap.Domain.Common.Validation.ValidationBase;
-using ZoomMap.Domain.Common.ValueObjects;
+using ZoomMap.Domain.Common.Validation.Errors;
 
-namespace ZoomMap.Domain.Common.Validation.ValidationMediators
+namespace ZoomMap.Domain.Common.ValueObjects.NeighbourhoodValueObject
 {
     public class NeighbourhoodValidationMediator : IValidationMediator<Neighbourhood>
     {
@@ -20,9 +20,9 @@ namespace ZoomMap.Domain.Common.Validation.ValidationMediators
                 new List<IValidationRule<Neighbourhood>>
                 {
                     new NotEmptyValidationRule<Neighbourhood>(
-                        x => x.Name , Errors.Errors.Neighbourhood.NotEmptyName
+                        x => x.Name , Errors.Neighbourhood.NotEmptyName
                     )
-                }    
+                }
             );
 
             return new NeighbourhoodValidationMediator(validationMediator);

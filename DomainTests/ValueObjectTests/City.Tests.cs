@@ -1,5 +1,5 @@
-﻿using ZoomMap.Domain.Common.ValueObjects;
-using ZoomMap.Domain.Common.Validation.Errors;
+﻿using ZoomMap.Domain.Common.Validation.Errors;
+using ZoomMap.Domain.Common.ValueObjects.CityValueObject;
 
 namespace DomainTests.ValueObjectTests
 {
@@ -28,7 +28,7 @@ namespace DomainTests.ValueObjectTests
             var result = City.Create(name);
 
             // Assert
-            Assert.False(result.IsSuccess);
+            Assert.True(result.IsFailure);
             Assert.Equal(Errors.City.NotEmptyName, result.Error);
         }
 
