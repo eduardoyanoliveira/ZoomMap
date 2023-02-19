@@ -1,4 +1,5 @@
 ﻿using ZoomMap.Domain.Common.Models;
+using ZoomMap.Domain.Entities.ProductEntity;
 using ZoomMap.Domain.Entities.ProductEntity.ValueObjects;
 
 namespace ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate.ValueObjects
@@ -6,14 +7,12 @@ namespace ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate.ValueObjects
     public sealed class DetachedProduct : ValueObject
     {
         public ProductId ProductId { get; }
-
-        // Todo: Implement a way that if the Price is not given, it would take the price from ProductEntity
-        public double? Price { get; }
+        public double Price { get; }
         public int Quantity { get; }
 
         private DetachedProduct(
             ProductId productId,
-            double? price,
+            double price,
             int quantity
         )
         {
@@ -22,9 +21,20 @@ namespace ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate.ValueObjects
             Quantity = quantity;
         }
 
+        private DetachedProduct(
+            Product product,
+            double? price,
+            int quantity
+        ) 
+        { 
+            ProductId = product.Id;
+            Quantity = quantity;
+            Price = price ?? product.Price;
+        }
+
         public static DetachedProduct Create(
             ProductId productId,
-            double? price,
+            double price,
             int quantity
         )
         {
@@ -35,11 +45,23 @@ namespace ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate.ValueObjects
             );
         }
 
-        public double GetSubtotal()
+        public static DetachedProduct Create(
+            Product product,
+            double? price,
+            int quantity
+        )       
         {
-            return Quantity * (double)Price;
+            return new DetachedProduct(
+                product,
+                price,
+                quantity
+            );
         }
 
+        public double GetSubtotal()
+        {
+            return Quantity * Price;
+        }
 
         public override IEnumerable<object> GetEqualityComponents()
         {

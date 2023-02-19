@@ -1,4 +1,5 @@
 ﻿using ZoomMap.Domain.Common.Models;
+using ZoomMap.Domain.Entities.ProductEntity;
 using ZoomMap.Domain.Entities.ProductEntity.ValueObjects;
 
 namespace ZoomMap.Domain.Entities.ServiceEntity.ValueObjects
@@ -6,14 +7,12 @@ namespace ZoomMap.Domain.Entities.ServiceEntity.ValueObjects
     public sealed class ServiceProduct : ValueObject
     {
         public ProductId ProductId { get; }
-
-        // Todo: Implement a way that if the Price is not given, it would take the price from ProductEntity
-        public double? Price { get; }
+        public double Price { get; }
         public int Quantity { get; }
 
         private ServiceProduct(
             ProductId productId,
-            double? price,
+            double price,
             int quantity
         )
         {
@@ -22,9 +21,20 @@ namespace ZoomMap.Domain.Entities.ServiceEntity.ValueObjects
             Quantity = quantity;
         }
 
+        private ServiceProduct(
+            Product product,
+            double? price,
+            int quantity
+        )
+        {
+            ProductId = product.Id;
+            Price = price ?? product.Price;
+            Quantity = quantity;
+        }
+
         public static ServiceProduct Create(
             ProductId productId,
-            double? price,
+            double price,
             int quantity
         )
         {
@@ -35,11 +45,23 @@ namespace ZoomMap.Domain.Entities.ServiceEntity.ValueObjects
             );
         }
 
-        public double GetSubtotal()
+        public static ServiceProduct Create(
+           Product product,
+           double? price,
+           int quantity
+        )
         {
-            return Quantity * (double)Price;
+            return new ServiceProduct(
+                product,
+                price,
+                quantity
+            );
         }
 
+        public double GetSubtotal()
+        {
+            return Quantity * Price;
+        }
 
         public override IEnumerable<object> GetEqualityComponents()
         {
