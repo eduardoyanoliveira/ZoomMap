@@ -1,16 +1,16 @@
 ﻿using ZoomMap.Domain.Common.Models;
 
-namespace ZoomMap.Domain.ProductAggregate.ValueObjects
+namespace ZoomMap.Domain.Entities.ServiceEntity.ValueObjects
 {
-    public sealed class DetachedProductId : ValueObject
+    public sealed class ServiceId : ValueObject
     {
         public Guid Value { get; }
 
-        private DetachedProductId(Guid value)
+        private ServiceId(Guid value)
         {
             Value = value;
         }
-        public static DetachedProductId CreateUnique() => new DetachedProductId(Guid.NewGuid());
+        public static ServiceId CreateUnique() => new ServiceId(Guid.NewGuid());
 
         public override IEnumerable<object> GetEqualityComponents()
         {

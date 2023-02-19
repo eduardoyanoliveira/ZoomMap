@@ -1,22 +1,21 @@
 ﻿using ZoomMap.Domain.Common.Models;
-using ZoomMap.Domain.ProductAggregate.ValueObjects;
-using ZoomMap.Domain.ServiceAggregate.ValueObjects;
+using ZoomMap.Domain.Entities.ProductEntity.ValueObjects;
 
-namespace ZoomMap.Domain.ServiceAggregate.Entities
+namespace ZoomMap.Domain.Entities.ServiceEntity.ValueObjects
 {
-    public sealed class ServiceProduct : Entity<ServiceProductId>
+    public sealed class ServiceProduct : ValueObject
     {
         public ProductId ProductId { get; }
+
+        // Todo: Implement a way that if the Price is not given, it would take the price from ProductEntity
         public double? Price { get; }
         public int Quantity { get; }
 
         private ServiceProduct(
-            ServiceProductId serviceProductId,
             ProductId productId,
             double? price,
             int quantity
         )
-            : base(serviceProductId)
         {
             ProductId = productId;
             Price = price;
@@ -30,11 +29,23 @@ namespace ZoomMap.Domain.ServiceAggregate.Entities
         )
         {
             return new ServiceProduct(
-                ServiceProductId.CreateUnique(),
                 productId,
                 price,
                 quantity
             );
+        }
+
+        public double GetSubtotal()
+        {
+            return Quantity * (double)Price;
+        }
+
+
+        public override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return ProductId.GetHashCode();
+            yield return Price;
+            yield return Quantity;
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using ZoomMap.Domain.Common.Models;
-using ZoomMap.Domain.ServiceAggregate.Entities;
-using ZoomMap.Domain.ServiceAggregate.ValueObjects;
+using ZoomMap.Domain.Entities.ServiceEntity.ValueObjects;
 
-namespace ZoomMap.Domain.ServiceAggregate
+namespace ZoomMap.Domain.Entities.ServiceEntity
 {
     public sealed class Service : AggregateRoot<ServiceId>
     {
@@ -18,9 +17,9 @@ namespace ZoomMap.Domain.ServiceAggregate
             string name,
             double servicePrice,
             List<ServiceProduct>? serviceProducts
-        ) 
-            : base(serviceId) 
-        { 
+        )
+            : base(serviceId)
+        {
             Name = name;
             ServicePrice = servicePrice;
             _serviceProducts = serviceProducts ?? new();

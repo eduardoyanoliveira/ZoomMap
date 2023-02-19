@@ -1,16 +1,10 @@
 ﻿using ZoomMap.Domain.Common.Models;
-using ZoomMap.Domain.ProductAggregate.ValueObjects;
-using ZoomMap.Domain.ServiceAggregate.ValueObjects;
+using ZoomMap.Domain.Entities.ProductEntity.ValueObjects;
 
-namespace ZoomMap.Domain.ProductAggregate
+namespace ZoomMap.Domain.Entities.ProductEntity
 {
-    public sealed class Product : AggregateRoot<ProductId>
+    public sealed class Product : Entity<ProductId>
     {
-        private List<ServiceProductId> _serviceProducts = new();
-        public IReadOnlyList<ServiceProductId> ServiceProducts => _serviceProducts.AsReadOnly();
-
-        private List<DetachedProductId> _detachedProducts = new();
-        public IReadOnlyList<DetachedProductId> DetachedProducts => _detachedProducts.AsReadOnly();
 
         public string Name { get; }
         public double Price { get; }

@@ -1,11 +1,11 @@
-﻿using ZoomMap.Domain.Common.Models;
-using ZoomMap.Domain.ContractAggregate.ValueObjects;
-using ZoomMap.Domain.CustomerAggregate.ValueObjects;
-using ZoomMap.Domain.SellerAggregate.ValueObjects;
+﻿using ZoomMap.Domain.Aggregates.ContractAggregate.ValueObjects;
+using ZoomMap.Domain.Common.Models;
+using ZoomMap.Domain.Entities.CustomerEntity.ValueObjects;
+using ZoomMap.Domain.Entities.SellerEntity.ValueObjects;
 using ZoomMap.Domain.ServiceAppointmentAggregate.ValueObjects;
 
 
-namespace ZoomMap.Domain.ContractAggregate
+namespace ZoomMap.Domain.Aggregates.ContractAggregate
 {
     public sealed class Contract : AggregateRoot<ContractId>
     {

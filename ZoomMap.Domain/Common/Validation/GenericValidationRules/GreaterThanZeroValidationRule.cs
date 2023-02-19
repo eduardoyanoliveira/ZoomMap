@@ -5,10 +5,10 @@ namespace ZoomMap.Domain.Common.Validation.GenericValidationRules
 {
     public class GreaterThanZeroValidationRule<T> : IValidationRule<T>
     {
-        private readonly Func<T, int> _selector;
+        private readonly Func<T, double> _selector;
         private readonly Error _error;
 
-        public GreaterThanZeroValidationRule(Func<T, int> selector, Error error)
+        public GreaterThanZeroValidationRule(Func<T, double> selector, Error error)
         {
             _selector = selector;
             _error = error;

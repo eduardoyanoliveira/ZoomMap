@@ -1,7 +1,6 @@
 ﻿using ZoomMap.Domain.Common.Models;
-using ZoomMap.Domain.CustomerAggregate.ValueObjects;
-using ZoomMap.Domain.ServiceAggregate.ValueObjects;
-using ZoomMap.Domain.ServiceAppointmentAggregate.Entities;
+using ZoomMap.Domain.Entities.CustomerEntity.ValueObjects;
+using ZoomMap.Domain.Entities.ServiceEntity.ValueObjects;
 using ZoomMap.Domain.ServiceAppointmentAggregate.ValueObjects;
 
 namespace ZoomMap.Domain.ServiceAppointmentAggregate

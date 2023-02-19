@@ -1,8 +1,8 @@
 ﻿using ZoomMap.Domain.Common.Models;
-using ZoomMap.Domain.SellerAggregate.ValueObjects;
+using ZoomMap.Domain.Entities.SellerEntity.ValueObjects;
 using ZoomMap.Domain.UserAggregate.ValueObjects;
 
-namespace ZoomMap.Domain.SellerAggregate
+namespace ZoomMap.Domain.Entities.SellerEntity
 {
     public sealed class Seller : AggregateRoot<SellerId>
     {
