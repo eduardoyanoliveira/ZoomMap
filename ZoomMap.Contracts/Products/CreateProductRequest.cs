@@ -2,6 +2,6 @@
 {
     public record CreateProductRequest(
           string Name,
-          string Price
+          double Price
     );
 }
