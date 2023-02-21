@@ -1,9 +1,11 @@
-﻿namespace ZoomMap.Application.Interfaces.Data
+﻿using ZoomMap.Domain.Common.Validation.ErrorBase;
+
+namespace ZoomMap.Application.Interfaces.Data
 {
     public interface IRepository<T>
     {
-        T GetById(Guid id);
-        void Update(T entity);
-        void Save(T entity);
+        Result<T> GetById(Guid id);
+        Result<bool> Update(T entity);
+        Result<bool> Add(T entity);
     }
 }

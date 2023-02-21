@@ -4,12 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 using ZoomMap.Application.Interfaces.Authentication;
 using ZoomMap.Application.Interfaces.Data;
 using ZoomMap.Application.Interfaces.Services;
-using ZoomMap.Infra.Data;
 using ZoomMap.Infra.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using ZoomMap.Infra.InMemoryRepositories;
 
 namespace ZoomMap.Infra;
 public static class DependencyInjection
@@ -22,7 +22,8 @@ public static class DependencyInjection
         services.AddAuth(configuration);
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
 
-        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserRepository, InMemoryUserRepository>();
+        services.AddScoped<IProductRepository, InMemoryProductRepository>();
 
         return services;
     }

@@ -20,13 +20,15 @@ namespace ZoomMap.Application.Authentication.Queries
 
         public async Task<Result<AuthenticationResult>> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
-            var user = _userRepository.GetUserByEmail(request.Email);
+            var getUserResult = _userRepository.GetUserByEmail(request.Email);
 
-            if (user == null)
+            if (getUserResult.IsFailure)
             {
                 return Result<AuthenticationResult>.
                     Fail(Errors.Authentication.InvalidCredentials);
             }
+
+            var user = getUserResult.GetValue();
 
             if (user.Password != request.Password)
             {

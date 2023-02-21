@@ -21,8 +21,7 @@ namespace ZoomMap.Application.Authentication.Commands
 
         public async Task<Result<AuthenticationResult>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            // 1. Validate the user doesn't exist
-            if (_userRepository.GetUserByEmail(request.Email) is not null)
+            if (_userRepository.GetUserByEmail(request.Email).IsSuccess)
             {
                 return Result<AuthenticationResult>.Fail(Errors.User.DuplicatedEmail);
             }
@@ -34,7 +33,12 @@ namespace ZoomMap.Application.Authentication.Commands
                 Password = request.Password
             };
 
-            _userRepository.Add(user);
+            var persistUserReulst = _userRepository.Add(user);
+
+            if (persistUserReulst.IsFailure)
+            {
+                return Result<AuthenticationResult>.Fail(Errors.Database.InsertError);
+            }
 
             var token = _jwtTokenGenerator.GenerateToken(user);
 

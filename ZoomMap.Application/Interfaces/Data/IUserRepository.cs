@@ -1,10 +1,10 @@
-﻿using ZoomMap.Domain.UserAggregate;
+﻿using ZoomMap.Domain.Common.Validation.ErrorBase;
+using ZoomMap.Domain.UserAggregate;
 
 namespace ZoomMap.Application.Interfaces.Data
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepository<User>
     {
-        User? GetUserByEmail(string email);
-        void Add(User user);
+        Result<User> GetUserByEmail(string email);
     }
 }
