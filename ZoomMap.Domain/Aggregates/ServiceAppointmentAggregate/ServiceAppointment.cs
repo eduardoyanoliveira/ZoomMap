@@ -2,6 +2,7 @@
 using ZoomMap.Domain.Entities.CustomerEntity.ValueObjects;
 using ZoomMap.Domain.Entities.ServiceEntity.ValueObjects;
 using ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate.ValueObjects;
+using ZoomMap.Domain.Entities.ServiceEntity.DomainEvents;
 
 namespace ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate
 {
@@ -9,6 +10,8 @@ namespace ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate
     {
         private List<DetachedProduct> _detachedProducts = new();
         public IReadOnlyList<DetachedProduct> DetachedProducts => _detachedProducts.AsReadOnly();
+
+        private double? _serviceTotalPrice;
 
         public ServiceId ServiceId { get; }
         public CustomerId CustomerId { get; }
@@ -23,7 +26,7 @@ namespace ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate
             DateTime appointmentDateTime,
             DateTime? executionDateTime,
             string obs,
-            List<DetachedProduct>? detachedProducts
+            List<DetachedProduct> detachedProducts
         )
             : base(serviceAppointmentId)
         {
@@ -41,7 +44,7 @@ namespace ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate
             DateTime appointmentDateTime,
             DateTime? executionDateTime,
             string obs,
-            List<DetachedProduct>? detachedProducts
+            List<DetachedProduct> detachedProducts = null
         )
         {
             return new ServiceAppointment(
@@ -53,6 +56,24 @@ namespace ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate
                 obs,
                 detachedProducts
             );
+        }
+
+        public double GetTotalPrice()
+        {
+            var detachedProductsTotal = _detachedProducts.Sum(p => p.Quantity * p.Price);
+
+            if (_serviceTotalPrice.HasValue)
+            {
+                return _serviceTotalPrice.Value + detachedProductsTotal;
+            }
+
+            return detachedProductsTotal;
+        }
+
+        // Handle the domain event
+        public void Handle(ServiceTotalCalculatedEvent domainEvent)
+        {
+           _serviceTotalPrice = domainEvent.TotalPrice; 
         }
     }
 }
