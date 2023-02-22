@@ -12,6 +12,7 @@ namespace ZoomMap.Api.Mapping
             config.NewConfig<CreateProductRequest, CreateProductCommand>();
 
             config.NewConfig<ProductResult, ProductResponse>()
+                .Map(dest => dest.Id, src => src.Product.Id.Value)
                 .Map(dest => dest, src => src.Product);
         }
 

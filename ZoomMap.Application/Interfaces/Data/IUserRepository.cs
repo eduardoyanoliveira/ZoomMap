@@ -5,6 +5,6 @@ namespace ZoomMap.Application.Interfaces.Data
 {
     public interface IUserRepository : IRepository<User>
     {
-        Result<User> GetUserByEmail(string email);
+        Task<Result<User>> GetUserByEmail(string email);
     }
 }

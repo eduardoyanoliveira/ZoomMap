@@ -22,6 +22,7 @@
     <Folder Include="Interfaces\Authentication\" />
     <Folder Include="Interfaces\Servcices\" />
     <Folder Include="Products\Queries\" />
+    <Folder Include="Services\Queries\" />
   </ItemGroup>
 
 </Project>

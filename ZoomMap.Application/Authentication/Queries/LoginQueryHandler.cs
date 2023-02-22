@@ -20,7 +20,7 @@ namespace ZoomMap.Application.Authentication.Queries
 
         public async Task<Result<AuthenticationResult>> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
-            var getUserResult = _userRepository.GetUserByEmail(request.Email);
+            var getUserResult = await _userRepository.GetUserByEmail(request.Email);
 
             if (getUserResult.IsFailure)
             {

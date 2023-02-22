@@ -21,7 +21,9 @@ namespace ZoomMap.Application.Products.Commands
             CancellationToken cancellationToken
         )
         {
-            if (_productRepository.GetByName(request.Name).IsSuccess)
+            var getProductByNameResult = await _productRepository.GetByName(request.Name);
+
+            if (getProductByNameResult.IsSuccess)
             {
                 return Result<ProductResult>.Fail(Errors.Product.NotUniqueProductName);
             }
@@ -31,7 +33,7 @@ namespace ZoomMap.Application.Products.Commands
                 request.Price
             );
 
-            var persistProductResult = _productRepository.Add(product);
+            var persistProductResult = await _productRepository.Add(product);
 
             if (persistProductResult.IsFailure)
             {

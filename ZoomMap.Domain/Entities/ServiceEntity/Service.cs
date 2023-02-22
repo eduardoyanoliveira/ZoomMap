@@ -1,6 +1,4 @@
-﻿using ZoomMap.Domain.Common.Events;
-using ZoomMap.Domain.Common.Models;
-using ZoomMap.Domain.Entities.ServiceEntity.DomainEvents;
+﻿using ZoomMap.Domain.Common.Models;
 using ZoomMap.Domain.Entities.ServiceEntity.ValueObjects;
 
 namespace ZoomMap.Domain.Entities.ServiceEntity
@@ -29,21 +27,21 @@ namespace ZoomMap.Domain.Entities.ServiceEntity
 
         public double CalculateTotalPrice()
         {
-            var totalPrice = _serviceProducts.Sum(p => p.Price * p.Quantity);
+            var totalPrice = _serviceProducts.Sum(p => p.Price * p.Quantity) + ServicePrice;
 
             return totalPrice;
         }
 
         public static Service Create(
             string name,
-            double servicePrice,
-            List<ServiceProduct>? serviceProducts
+            List<ServiceProduct>? serviceProducts,
+            double? servicePrice = null
         )
         {
             return new Service(
                 ServiceId.CreateUnique(),
                 name,
-                servicePrice,
+                servicePrice ?? 0,
                 serviceProducts
             );
         }

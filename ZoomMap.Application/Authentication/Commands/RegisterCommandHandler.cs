@@ -21,7 +21,8 @@ namespace ZoomMap.Application.Authentication.Commands
 
         public async Task<Result<AuthenticationResult>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            if (_userRepository.GetUserByEmail(request.Email).IsSuccess)
+            var getUserByEmailResult = await _userRepository.GetUserByEmail(request.Email);
+            if (getUserByEmailResult.IsSuccess)
             {
                 return Result<AuthenticationResult>.Fail(Errors.User.DuplicatedEmail);
             }
@@ -33,7 +34,7 @@ namespace ZoomMap.Application.Authentication.Commands
                 Password = request.Password
             };
 
-            var persistUserReulst = _userRepository.Add(user);
+            var persistUserReulst = await _userRepository.Add(user);
 
             if (persistUserReulst.IsFailure)
             {

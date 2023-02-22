@@ -24,6 +24,7 @@ public static class DependencyInjection
 
         services.AddScoped<IUserRepository, InMemoryUserRepository>();
         services.AddScoped<IProductRepository, InMemoryProductRepository>();
+        services.AddScoped<IServiceRepository, InMemoryServiceRepository>();
 
         return services;
     }

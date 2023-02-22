@@ -5,6 +5,6 @@ namespace ZoomMap.Application.Interfaces.Data
 {
     public interface IProductRepository : IRepository<Product>
     {
-        Result<Product> GetByName(string name);
+        Task<Result<Product>> GetByName(string name);
     }
 }

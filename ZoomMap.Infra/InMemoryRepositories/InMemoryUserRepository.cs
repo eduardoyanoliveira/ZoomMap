@@ -9,33 +9,33 @@ namespace ZoomMap.Infra.InMemoryRepositories
     {
         private static readonly List<User> _users = new();
 
-        public Result<bool> Add(User user)
+        public async Task<Result<bool>> Add(User user)
         {
             _users.Add(user);
 
-            return Result<bool>.Ok(true);
+            return await Task.FromResult(Result<bool>.Ok(true));
         }
 
 
-        public Result<User> GetUserByEmail(string email)
+        public async Task<Result<User>> GetUserByEmail(string email)
         {
             var user = _users.SingleOrDefault(u => u.Email == email);
 
             if (user is null)
             {
-                return Result<User>.Fail(Errors.Database.RegisterNotFound);
+                return await Task.FromResult(Result<User>.Fail(Errors.Database.RegisterNotFound));
             }
 
-            return Result<User>.Ok(user);
+            return await Task.FromResult(Result<User>.Ok(user));
         }
 
 
-        public Result<User> GetById(Guid id)
+        public async Task<Result<User>> GetById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Result<bool> Update(User entity)
+        public async Task<Result<bool>> Update(User entity)
         {
             throw new NotImplementedException();
         }

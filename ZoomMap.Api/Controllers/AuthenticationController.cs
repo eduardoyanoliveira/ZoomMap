@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using MapsterMapper;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ZoomMap.Application.Authentication.Commands;
@@ -13,10 +14,12 @@ namespace ZoomMap.Api.Controllers
     public class AuthenticationController : ApiController
     {
         private readonly ISender _mediator;
+        private readonly IMapper _mapper;
 
-        public AuthenticationController(ISender mediator)
+        public AuthenticationController(ISender mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
@@ -32,7 +35,7 @@ namespace ZoomMap.Api.Controllers
 
             if (result.IsFailure) return Problem(result.Error);
 
-            return Ok(result.GetValue());
+            return Ok(_mapper.Map<AuthenticationResponse>(result.GetValue()));
         }
 
 
@@ -48,7 +51,9 @@ namespace ZoomMap.Api.Controllers
 
             if (result.IsFailure) return Problem(result.Error);
 
-            return Ok(result.GetValue());
+            return Ok(
+                _mapper.Map<AuthenticationResponse>(result.GetValue())
+            );
         }
     }
 }
