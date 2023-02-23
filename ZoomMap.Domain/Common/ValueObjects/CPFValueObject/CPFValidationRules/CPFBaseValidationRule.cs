@@ -31,16 +31,8 @@ namespace ZoomMap.Domain.Common.ValueObjects.CPFValueObject.CPFValidationRules
 
         private int GetFirstVerifyingDigit(int[] cpf)
         {
-            int sum = 0;
-            int count = 0;
+            var mod = Enumerable.Range(2, 9).Reverse().Select((x, i) =>  x * cpf[i]).Sum() % 11;
 
-            for (int i = 10; i >= 2; i--)
-            {
-                sum += i * cpf[count];
-                count++;
-            }
-
-            int mod = sum % 11;
             int digit = mod < 2 ? 0 : 11 - mod;
 
             return digit;
@@ -53,16 +45,7 @@ namespace ZoomMap.Domain.Common.ValueObjects.CPFValueObject.CPFValidationRules
             Array.Copy(cpf, newCpf, 9);
             newCpf[9] = firstDigit;
 
-            int sum = 0;
-            int count = 0;
-
-            for (int i = 11; i >= 2; i--)
-            {
-                sum += i * newCpf[count];
-                count++;
-            }
-
-            int mod = sum % 11;
+             var mod = Enumerable.Range(2, 10).Reverse().Select((x, i) =>  x * cpf[i]).Sum() % 11;
             int digit = mod < 2 ? 0 : 11 - mod;
 
             return digit;
