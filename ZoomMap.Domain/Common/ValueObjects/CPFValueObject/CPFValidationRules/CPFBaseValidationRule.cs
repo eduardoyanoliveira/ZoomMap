@@ -45,7 +45,7 @@ namespace ZoomMap.Domain.Common.ValueObjects.CPFValueObject.CPFValidationRules
             Array.Copy(cpf, newCpf, 9);
             newCpf[9] = firstDigit;
 
-             var mod = Enumerable.Range(2, 10).Reverse().Select((x, i) =>  x * cpf[i]).Sum() % 11;
+             var mod = Enumerable.Range(2, 10).Reverse().Select((x, i) =>  x * newCpf[i]).Sum() % 11;
             int digit = mod < 2 ? 0 : 11 - mod;
 
             return digit;
