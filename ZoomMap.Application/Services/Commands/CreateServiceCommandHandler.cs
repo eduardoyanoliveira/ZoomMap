@@ -3,11 +3,9 @@
 using ZoomMap.Domain.Common.Validation.Errors;
 using ZoomMap.Application.Interfaces.Data;
 using ZoomMap.Application.Services.Common;
-using ZoomMap.Domain.Common.Models;
 using ZoomMap.Domain.Common.Validation.ErrorBase;
-using ZoomMap.Domain.Entities.ProductEntity.ValueObjects;
 using ZoomMap.Domain.Entities.ServiceEntity;
-using ZoomMap.Domain.Entities.ServiceEntity.ValueObjects;
+
 
 namespace ZoomMap.Application.Services.Commands
 {
@@ -15,29 +13,28 @@ namespace ZoomMap.Application.Services.Commands
         IRequestHandler<CreateServiceCommand, Result<ServiceResult>>
     {
         private readonly IServiceRepository _serviceRepository;
-
-        public CreateServiceCommandHandler(IServiceRepository serviceRepository)
+        private readonly IProductRepository _productRepository;
+        public CreateServiceCommandHandler(IServiceRepository serviceRepository, IProductRepository productRepository)
         {
             _serviceRepository = serviceRepository;
+            _productRepository = productRepository;
         }
 
         public async Task<Result<ServiceResult>> Handle(
             CreateServiceCommand request, CancellationToken cancellationToken
         )
         {
-            var serviceProducts = request.ServiceProducts.ConvertAll(
-                s => ServiceProduct.Create(
-                    ValueObjectUtils.FromString<ProductId>(s.ProductId)
-                    , s.Price
-                    , s.Quantity
-                )
-            );
+            var createServiceProducts = new CreateServiceProducts(_productRepository);
+            var serviceProductsResult = await createServiceProducts.Execute(request.ServiceProducts);
+            if (serviceProductsResult.IsFailure)
+            {
+                return Result<ServiceResult>.Fail(serviceProductsResult.Error);
+            }
 
-            Service service = Service.Create(
+            var service = Service.Create(
                 request.Name,
-                serviceProducts,
-                request.ServicePrice
-            );
+                serviceProductsResult.GetValue(),
+                request.ServicePrice);
 
 
             var persistUserReulst = await _serviceRepository.Add(service);

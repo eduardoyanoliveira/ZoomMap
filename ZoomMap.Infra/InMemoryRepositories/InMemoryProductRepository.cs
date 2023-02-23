@@ -17,7 +17,14 @@ namespace ZoomMap.Infra.InMemoryRepositories
 
         public async Task<Result<Product>> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var product = _products.FirstOrDefault(p => p.Id.Value == id);
+
+            if(product is null)
+            {
+                return await Task.FromResult(Result<Product>.Fail(Errors.Database.RegisterNotFound));
+            }
+
+            return await Task.FromResult(Result<Product>.Ok(product));
         }
 
         public async Task<Result<Product>> GetByName(string name)

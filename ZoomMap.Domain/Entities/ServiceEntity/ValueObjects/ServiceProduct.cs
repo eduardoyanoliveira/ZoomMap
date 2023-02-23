@@ -1,4 +1,5 @@
 ﻿using ZoomMap.Domain.Common.Models;
+using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.Entities.ProductEntity;
 using ZoomMap.Domain.Entities.ProductEntity.ValueObjects;
 
@@ -21,6 +22,7 @@ namespace ZoomMap.Domain.Entities.ServiceEntity.ValueObjects
             Quantity = quantity;
         }
 
+
         private ServiceProduct(
             Product product,
             double? price,
@@ -32,30 +34,34 @@ namespace ZoomMap.Domain.Entities.ServiceEntity.ValueObjects
             Quantity = quantity;
         }
 
-        public static ServiceProduct Create(
+        public static Result<ServiceProduct> Create(
             ProductId productId,
             double price,
             int quantity
         )
         {
-            return new ServiceProduct(
+            ServiceProduct serviceProduct = new ServiceProduct(
                 productId,
                 price,
                 quantity
             );
+
+            return Result<ServiceProduct>.Ok(serviceProduct);
         }
 
-        public static ServiceProduct Create(
+        public static Result<ServiceProduct> Create(
            Product product,
            double? price,
            int quantity
         )
         {
-            return new ServiceProduct(
+            ServiceProduct serviceProduct = new ServiceProduct(
                 product,
                 price,
                 quantity
             );
+            return Result<ServiceProduct>.Ok(serviceProduct);
+
         }
 
         public double GetSubtotal()
