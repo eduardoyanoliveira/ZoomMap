@@ -9,18 +9,19 @@ namespace ZoomMap.Infra.Events
 
         public EventHandlersService()
         {
-            Initialize handler subscriptions
-               var customerCreatedHandlers = new List<Func<IHandler<CustomerCreatedEvent>>>
-               {
-                   () => new CustomerCreatedEmailNotificationHandler(),
-                   () => new CustomerCreatedBillingHandler()
-               };
-            _handlerLists[typeof(CustomerCreatedEvent)] = new HandlerList<CustomerCreatedEvent>(customerCreatedHandlers);
+            // Initialize handler subscriptions
+
+            //var customerCreatedHandlers = new List<Func<IHandler<CustomerCreatedEvent>>>
+            //{
+            //    () => new CustomerCreatedEmailNotificationHandler(),
+            //    () => new CustomerCreatedBillingHandler()
+            //};
+            //_handlerLists[typeof(CustomerCreatedEvent)] = new HandlerList<CustomerCreatedEvent>(customerCreatedHandlers);
 
             //var orderPlacedHandlers = new List<IHandler<OrderPlacedEvent>>
             //{
-            //    new OrderPlacedEmailNotificationHandler(),
-            //    new OrderPlacedInventoryHandler()
+            //    () => new OrderPlacedEmailNotificationHandler(),
+            //    () => new OrderPlacedInventoryHandler()
             //};
             //_handlerLists[typeof(OrderPlacedEvent)] = new HandlerList<OrderPlacedEvent>(orderPlacedHandlers);
         }
