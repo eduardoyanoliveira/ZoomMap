@@ -21,11 +21,7 @@ namespace ZoomMap.Infra.Events
             var handlers =  _eventHandlersService.GetHandlersForEvent(@event);
             foreach (var handler in handlers)
             {
-                var handlerType = handler.GetType();
-                var handlerInstance = (IHandler<IEvent>)Activator.CreateInstance(handlerType);
-                handlerInstance.Handle(@event);
-
-               // handler.Handle(@event);
+               handler.Invoke().Handle(@event);
             }
 
             //LogEvent(@event);

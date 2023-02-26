@@ -2,6 +2,6 @@
 {
     public interface IEventHandlersService
     {
-        List<IHandler<IEvent>> GetHandlersForEvent(IEvent @event);
+        List<Func<IHandler<IEvent>>> GetHandlersForEvent(IEvent @event);
     }
 }
