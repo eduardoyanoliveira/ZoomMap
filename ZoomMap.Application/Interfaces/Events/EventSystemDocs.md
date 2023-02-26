@@ -1,4 +1,4 @@
-﻿# EventSystem
+﻿﻿# EventSystem
 
 This event system is an implementation of a Domain Event System using Domain-Driven Design (DDD) and Clean Architecture.
 Application Layer
@@ -10,12 +10,12 @@ The application layer contains the following interfaces and classes:
 This interface defines how a MessageBroker that will deal with domain events must act.
 
 ```mermaid
-
 classDiagram
+class IMessageBroker
 <<interface>> IMessageBroker
-void : Publish()
-List<IHandler<TEvent>> : GetHandlersByEvent()
-void: LogEvent()
+IMessageBroker : void Publish()
+IMessageBroker : List<IHandler<TEvent>> GetHandlersByEvent()
+IMessageBroker : void LogEvent()
 ```
 
     Publish(): Sends the domain event to all the registered handlers.
@@ -28,14 +28,13 @@ void: LogEvent()
 This interface describes the base implementation of a handler.
 
 ```mermaid
-
 classDiagram
-<<interface>> IHandler<TEvent>
-void Handle<TEvent>()
-
-    Handle(): Handles the domain event that is received from the MessageBroker.
+class IHandler
+<<interface>> IHandler
+IHandler : void Handle<TEvent>()
 ```
-
+        Handle(): Handles the domain event that is received from the MessageBroker.
+        
 ## Concrete Handlers
 
 All the Concrete Handlers will be placed in the application layer because usually each layer will have a repository for the subscriber entity and will also call the Handle method inside the entity on the domain layer.
@@ -58,26 +57,23 @@ The event system is usually triggered on the application layer whenever a state 
 Here is the implementation using Mermaid:
 
 ```mermaid
-
 classDiagram
+class IMessageBroker
 <<interface>> IMessageBroker
-void : Publish()
-List<IHandler<TEvent>> : GetHandlersByEvent()
-void: LogEvent()
-
-<<interface>> IHandler<TEvent>
-void Handle<TEvent>()
-
-class ConcreteHandler
--IHandler<TEvent>
-void Handle<TEvent>()
-
-class ConcreteMessageBroker
--IMessageBroker
-void Publish()
-List<IHandler<TEvent>> GetHandlersByEvent()
-void LogEvent()
-
+IMessageBroker : void Publish()
+IMessageBroker : List<IHandler<TEvent>> GetHandlersByEvent()
+IMessageBroker : void LogEvent()
+class IHandler
+<<interface>> IHandler
+IHandler : void Handle<TEvent>()
+class ConcreteHandler{
+    void Handle<TEvent>()
+}
+class ConcreteMessageBroker{
+    void Publish()
+    List<IHandler<TEvent>> GetHandlersByEvent()
+    void LogEvent()
+}
 ConcreteMessageBroker --> IMessageBroker
 ConcreteHandler --> IHandler
 ```
