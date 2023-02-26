@@ -12,6 +12,7 @@ This interface defines how a MessageBroker that will deal with domain events mus
 ```mermaid
 
 classDiagram
+class IMessageBroker
 <<interface>> IMessageBroker
 void : Publish()
 List<IHandler<TEvent>> : GetHandlersByEvent()
@@ -30,6 +31,7 @@ This interface describes the base implementation of a handler.
 ```mermaid
 
 classDiagram
+class IHandler
 <<interface>> IHandler<TEvent>
 void Handle<TEvent>()
 
@@ -60,11 +62,13 @@ Here is the implementation using Mermaid:
 ```mermaid
 
 classDiagram
+class IMessageBroker
 <<interface>> IMessageBroker
 void : Publish()
 List<IHandler<TEvent>> : GetHandlersByEvent()
 void: LogEvent()
 
+class IHandler<TEvent>
 <<interface>> IHandler<TEvent>
 void Handle<TEvent>()
 
