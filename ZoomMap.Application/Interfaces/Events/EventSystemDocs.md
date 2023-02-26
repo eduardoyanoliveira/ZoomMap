@@ -13,9 +13,9 @@ This interface defines how a MessageBroker that will deal with domain events mus
 classDiagram
 class IMessageBroker
 <<interface>> IMessageBroker
-void : Publish()
-List<IHandler<TEvent>> : GetHandlersByEvent()
-void: LogEvent()
+IMessageBroker : void Publish()
+IMessageBroker : List<IHandler<TEvent>> GetHandlersByEvent()
+IMessageBroker : void LogEvent()
 ```
 
     Publish(): Sends the domain event to all the registered handlers.
@@ -31,7 +31,7 @@ This interface describes the base implementation of a handler.
 classDiagram
 class IHandler<TEvent>
 <<interface>> IHandler<TEvent>
-void Handle<TEvent>()
+IHandler<TEvent> : void Handle<TEvent>()
 
     Handle(): Handles the domain event that is received from the MessageBroker.
 ```
@@ -61,20 +61,20 @@ Here is the implementation using Mermaid:
 classDiagram
 class IMessageBroker
 <<interface>> IMessageBroker
-void : Publish()
-List<IHandler<TEvent>> : GetHandlersByEvent()
-void: LogEvent()
+IMessageBroker : void Publish()
+IMessageBroker : List<IHandler<TEvent>> GetHandlersByEvent()
+IMessageBroker : void LogEvent()
 class IHandler<TEvent>
 <<interface>> IHandler<TEvent>
-void Handle<TEvent>()
-class ConcreteHandler
--IHandler<TEvent>
-void Handle<TEvent>()
-class ConcreteMessageBroker
--IMessageBroker
-void Publish()
-List<IHandler<TEvent>> GetHandlersByEvent()
-void LogEvent()
+IHandler<TEvent> : void Handle<TEvent>()
+class ConcreteHandler{
+    void Handle<TEvent>()
+}
+class ConcreteMessageBroker{
+    void Publish()
+    List<IHandler<TEvent>> GetHandlersByEvent()
+    void LogEvent()
+}
 ConcreteMessageBroker --> IMessageBroker
 ConcreteHandler --> IHandler
 ```
