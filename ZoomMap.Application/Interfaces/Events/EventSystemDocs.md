@@ -10,7 +10,6 @@ The application layer contains the following interfaces and classes:
 This interface defines how a MessageBroker that will deal with domain events must act.
 
 ```mermaid
-
 classDiagram
 class IMessageBroker
 <<interface>> IMessageBroker
@@ -29,9 +28,8 @@ void: LogEvent()
 This interface describes the base implementation of a handler.
 
 ```mermaid
-
 classDiagram
-class IHandler
+class IHandler<TEvent>
 <<interface>> IHandler<TEvent>
 void Handle<TEvent>()
 
@@ -60,28 +58,23 @@ The event system is usually triggered on the application layer whenever a state 
 Here is the implementation using Mermaid:
 
 ```mermaid
-
 classDiagram
 class IMessageBroker
 <<interface>> IMessageBroker
 void : Publish()
 List<IHandler<TEvent>> : GetHandlersByEvent()
 void: LogEvent()
-
 class IHandler<TEvent>
 <<interface>> IHandler<TEvent>
 void Handle<TEvent>()
-
 class ConcreteHandler
 -IHandler<TEvent>
 void Handle<TEvent>()
-
 class ConcreteMessageBroker
 -IMessageBroker
 void Publish()
 List<IHandler<TEvent>> GetHandlersByEvent()
 void LogEvent()
-
 ConcreteMessageBroker --> IMessageBroker
 ConcreteHandler --> IHandler
 ```
