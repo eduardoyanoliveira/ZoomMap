@@ -1,7 +1,8 @@
 ﻿﻿# EventSystem
 
 This event system is an implementation of a Domain Event System using Domain-Driven Design (DDD) and Clean Architecture.
-Application Layer
+
+## Application Layer
 
 The application layer contains the following interfaces and classes:
 
@@ -37,9 +38,11 @@ IHandler : void Handle<TEvent>()
         
 ## Concrete Handlers
 
-All the Concrete Handlers will be placed in the application layer because usually each layer will have a repository for the subscriber entity and will also call the Handle method inside the entity on the domain layer.
+All the Concrete Handlers will be placed in the application layer because usually each handler will have a repository for the subscriber entity and will also call the Handle method inside the entity on the domain layer.
 Each subscriber will have its own handler class. So an event can be subscribed by one or more entities in the domain layer.
-Infrastructure Layer
+
+
+## Infrastructure Layer
 
 The infrastructure layer is responsible for implementing the concrete MessageBroker.
 Concrete MessageBroker
@@ -50,11 +53,7 @@ Concrete MessageBroker
     The GetHandlersByEvent() method retrieves all the handlers that are subscribed to the domain event using a file with the subscribers list that will be placed in the same infrastructure layer. Each event will have its own file, where the developer can add or remove a handler.
     The Publish() method sends the domain event to all the handlers and logs the event on a database or another type of storage.
 
-## Trigger
-
-The event system is usually triggered on the application layer whenever a state changes.
-
-Here is the implementation using Mermaid:
+## Relationships
 
 ```mermaid
 classDiagram
