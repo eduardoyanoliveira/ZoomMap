@@ -29,9 +29,9 @@ This interface describes the base implementation of a handler.
 
 ```mermaid
 classDiagram
-class IHandler<TEvent>
+class IHandler
 <<interface>> IHandler<TEvent>
-IHandler<TEvent> : void Handle<TEvent>()
+IHandler : void Handle<TEvent>()
 
     Handle(): Handles the domain event that is received from the MessageBroker.
 ```
@@ -64,9 +64,9 @@ class IMessageBroker
 IMessageBroker : void Publish()
 IMessageBroker : List<IHandler<TEvent>> GetHandlersByEvent()
 IMessageBroker : void LogEvent()
-class IHandler<TEvent>
+class IHandler
 <<interface>> IHandler<TEvent>
-IHandler<TEvent> : void Handle<TEvent>()
+IHandler : void Handle<TEvent>()
 class ConcreteHandler{
     void Handle<TEvent>()
 }
