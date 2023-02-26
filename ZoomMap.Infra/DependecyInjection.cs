@@ -10,6 +10,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ZoomMap.Infra.InMemoryRepositories;
+using ZoomMap.Application.Interfaces.Events;
+using ZoomMap.Infra.Events;
 
 namespace ZoomMap.Infra;
 public static class DependencyInjection
@@ -19,7 +21,12 @@ public static class DependencyInjection
         ConfigurationManager configuration
     )
     {
+
         services.AddAuth(configuration);
+
+        services.AddScoped<IMessageBroker, MessageBroker>();
+        services.AddScoped<IEventHandlersService, EventHandlersService>();
+
         services.AddSingleton<IDateTimeProvider, DateTimeProvider>();
 
         services.AddScoped<IUserRepository, InMemoryUserRepository>();
