@@ -32,10 +32,9 @@ classDiagram
 class IHandler
 <<interface>> IHandler
 IHandler : void Handle<TEvent>()
-
-    Handle(): Handles the domain event that is received from the MessageBroker.
 ```
-
+        Handle(): Handles the domain event that is received from the MessageBroker.
+        
 ## Concrete Handlers
 
 All the Concrete Handlers will be placed in the application layer because usually each layer will have a repository for the subscriber entity and will also call the Handle method inside the entity on the domain layer.
