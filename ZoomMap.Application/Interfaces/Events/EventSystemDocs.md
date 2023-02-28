@@ -1,4 +1,4 @@
-﻿﻿# EventSystem
+# EventSystem
 
 This event system is an implementation of a Domain Event System using Domain-Driven Design (DDD) and Clean Architecture.
 
