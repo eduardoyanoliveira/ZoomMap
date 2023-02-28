@@ -102,3 +102,4 @@ The Event System described in this scenario is an implementation of Domain Event
 - Complexity: This system can be more complex than a simpler implementation of event handling. It may be difficult to understand for developers who are new to DDD or Clean Architecture.
 
 - File-based implementation: The use of files to store the subscriber list for each event may not be the most efficient or scalable way to handle subscriptions. Additionally, modifying the list of subscribers requires changing the file, which may be cumbersome.
+

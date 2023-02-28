@@ -1,4 +1,6 @@
 ﻿using ZoomMap.Domain.Common.Models;
+using ZoomMap.Domain.Common.Validation.ErrorBase;
+using ZoomMap.Domain.Common.Validation.ValidationBase;
 using ZoomMap.Domain.Entities.ProductEntity.ValueObjects;
 
 namespace ZoomMap.Domain.Entities.ProductEntity
@@ -8,6 +10,9 @@ namespace ZoomMap.Domain.Entities.ProductEntity
 
         public string Name { get; }
         public double Price { get; }
+
+        private static readonly IValidationMediator<Product> _validationMediator 
+            = ProductValidationMediator.Create();
 
         private Product(
             ProductId productId,
@@ -20,16 +25,19 @@ namespace ZoomMap.Domain.Entities.ProductEntity
             Price = price;
         }
 
-        public static Product Create(
+        public static Result<Product> Create(
             string name,
             double price
         )
         {
-            return new Product(
+            Product product = new Product(
                 ProductId.CreateUnique(),
                 name,
                 price
             );
+
+            return _validationMediator.ValidateBatch( product );
+
         }
     }
 }

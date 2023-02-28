@@ -9,7 +9,6 @@ namespace ZoomMap.Domain.Entities.ServiceEntity
         public IReadOnlyList<ServiceProduct> ServiceProducts => _serviceProducts.AsReadOnly();
 
         public string Name { get; }
-
         public double ServicePrice { get; }
 
         private Service(

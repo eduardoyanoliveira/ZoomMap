@@ -1,4 +1,6 @@
-﻿namespace ZoomMap.Application.Interfaces.Events
+﻿using ZoomMap.Domain.Common.Events;
+
+namespace ZoomMap.Application.Interfaces.Events
 {
     public interface IEventHandlersService
     {

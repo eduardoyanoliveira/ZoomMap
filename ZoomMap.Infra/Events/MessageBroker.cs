@@ -1,4 +1,5 @@
 ﻿using ZoomMap.Application.Interfaces.Events;
+using ZoomMap.Domain.Common.Events;
 
 namespace ZoomMap.Infra.Events
 {

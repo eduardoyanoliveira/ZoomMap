@@ -1,4 +1,6 @@
-﻿using ZoomMap.Domain.Entities.ProductEntity;
+﻿using ZoomMap.Domain.Common.Validation.Errors;
+using ZoomMap.Domain.Common.Validation.ErrorBase;
+using ZoomMap.Domain.Entities.ProductEntity;
 
 namespace DomainTests.Entities
 {
@@ -11,8 +13,12 @@ namespace DomainTests.Entities
             string name = "";
             double price = 1.99;
 
-            // Act and Assert
-            Assert.Throws<ArgumentException>(() => Product.Create(name, price));
+            // Act
+             Result<Product> result = Product.Create(name, price);
+
+            // Assert
+            Assert.True(result.IsFailure);
+            Assert.Equal(Errors.Product.EmptyOrNullProductName, result.Error);
         }
 
         [Fact]
@@ -22,8 +28,12 @@ namespace DomainTests.Entities
             string name = "Test Product";
             double price = 0;
 
-            // Act and Assert
-            Assert.Throws<ArgumentException>(() => Product.Create(name, price));
+            // Act
+            Result<Product> result = Product.Create(name, price);
+
+            // Assert
+            Assert.True(result.IsFailure);
+            Assert.Equal(Errors.Product.NotGreaterThanZeroPrice, result.Error);
         }
 
         [Fact]
@@ -37,9 +47,9 @@ namespace DomainTests.Entities
             var result = Product.Create(name, price);
 
             // Assert
-            Assert.NotNull(result);
-            Assert.Equal(name, result.Name);
-            Assert.Equal(price, result.Price);
+            Assert.NotNull(result.GetValue());
+            Assert.Equal(name, result.GetValue().Name);
+            Assert.Equal(price, result.GetValue().Price);
         }
     }
 }
