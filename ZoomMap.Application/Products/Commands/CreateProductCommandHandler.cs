@@ -28,12 +28,19 @@ namespace ZoomMap.Application.Products.Commands
                 return Result<ProductResult>.Fail(Errors.Product.NotUniqueProductName);
             }
 
-            Product product = Product.Create(
+            Result<Product> productCreationResult = Product.Create(
                 request.Name,
                 request.Price
             );
 
-            var persistProductResult = await _productRepository.Add(product);
+            if (productCreationResult.IsFailure)
+            {
+                return Result<ProductResult>.Fail(productCreationResult.Error);
+            }
+
+            Product product = productCreationResult.GetValue();
+
+            Result<bool> persistProductResult = await _productRepository.Add(product);
 
             if (persistProductResult.IsFailure)
             {
@@ -42,7 +49,7 @@ namespace ZoomMap.Application.Products.Commands
                 );
             }
 
-            var result = new ProductResult(product);
+            ProductResult result = new ProductResult(product);
 
             return Result<ProductResult>.Ok(result);
         }

@@ -1,4 +1,7 @@
 ﻿using ZoomMap.Domain.Common.Models;
+using ZoomMap.Domain.Common.Validation.ErrorBase;
+using ZoomMap.Domain.Common.Validation.ValidationBase;
+using ZoomMap.Domain.Entities.ProductEntity;
 using ZoomMap.Domain.Entities.ServiceEntity.ValueObjects;
 
 namespace ZoomMap.Domain.Entities.ServiceEntity
@@ -7,6 +10,9 @@ namespace ZoomMap.Domain.Entities.ServiceEntity
     {
         private List<ServiceProduct> _serviceProducts = new();
         public IReadOnlyList<ServiceProduct> ServiceProducts => _serviceProducts.AsReadOnly();
+
+        private static readonly IValidationMediator<Service> _validationMediator
+            = ServiceValidationMediator.Create();
 
         public string Name { get; }
         public double ServicePrice { get; }
@@ -31,18 +37,20 @@ namespace ZoomMap.Domain.Entities.ServiceEntity
             return totalPrice;
         }
 
-        public static Service Create(
+        public static Result<Service> Create(
             string name,
             List<ServiceProduct>? serviceProducts,
             double? servicePrice = null
         )
         {
-            return new Service(
+            Service service = new Service(
                 ServiceId.CreateUnique(),
                 name,
                 servicePrice ?? 0,
                 serviceProducts
             );
+
+            return _validationMediator.ValidateBatch(service);
         }
     }
 }
