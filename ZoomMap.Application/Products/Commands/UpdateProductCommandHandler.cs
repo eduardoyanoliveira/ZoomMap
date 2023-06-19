@@ -1,26 +1,33 @@
 ﻿using MediatR;
 using ZoomMap.Application.Interfaces.Data;
+using ZoomMap.Application.Interfaces.Events;
 using ZoomMap.Application.Products.Common;
 using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.Common.Validation.Errors;
 using ZoomMap.Domain.Entities.ProductEntity;
+using ZoomMap.Domain.Entities.ProductEntity.DomainEvents;
 
 namespace ZoomMap.Application.Products.Commands
 {
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Result<ProductResult>>
+    public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, Result<ProductResult>>
     {
         private readonly IProductRepository _productRepository;
-
-        public CreateProductCommandHandler(IProductRepository productRepository)
+        private readonly IMessageBroker _messageBroker;
+        public UpdateProductCommandHandler(
+            IProductRepository productRepository, 
+            IMessageBroker messageBroker
+        )
         {
             _productRepository = productRepository;
+            _messageBroker = messageBroker;
         }
 
         public async Task<Result<ProductResult>> Handle(
-            CreateProductCommand request,
+            UpdateProductCommand request,
             CancellationToken cancellationToken
         )
         {
+            // Duplicated Validation with Create and Update
             var getProductByNameResult = await _productRepository.GetByName(request.Name);
 
             if (getProductByNameResult.IsSuccess)
@@ -28,7 +35,9 @@ namespace ZoomMap.Application.Products.Commands
                 return Result<ProductResult>.Fail(Errors.Product.NotUniqueProductName);
             }
 
+
             Result<Product> productCreationResult = Product.Create(
+                request.Id,
                 request.Name,
                 request.Price
             );
@@ -40,7 +49,7 @@ namespace ZoomMap.Application.Products.Commands
 
             Product product = productCreationResult.GetValue();
 
-            Result<Product> persistProductResult = await _productRepository.Add(product);
+            Result<Product> persistProductResult = await _productRepository.Update(product);
 
             if (persistProductResult.IsFailure)
             {
@@ -48,6 +57,8 @@ namespace ZoomMap.Application.Products.Commands
                     Errors.Database.InsertError
                 );
             }
+
+            _messageBroker.Publish(new ProductPriceChangedEvent(product.Id.Value, product.Price));
 
             ProductResult result = new ProductResult(product);
 

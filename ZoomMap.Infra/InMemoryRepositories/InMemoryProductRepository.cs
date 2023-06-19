@@ -2,22 +2,23 @@
 using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.Entities.ProductEntity;
 using ZoomMap.Domain.Common.Validation.Errors;
+using ZoomMap.Application.Interfaces.Data.IAbstractRepositories;
 
 namespace ZoomMap.Infra.InMemoryRepositories
 {
     public class InMemoryProductRepository : IProductRepository
     {
         private static readonly List<Product> _products = new();
-        public async Task<Result<bool>> Add(Product entity)
+        public async Task<Result<Product>> Add(Product entity)
         {
             _products.Add(entity);
 
-            return await Task.FromResult(Result<bool>.Ok(true));
+            return await Task.FromResult(Result<Product>.Ok(entity));
         }
 
-        public async Task<Result<Product>> GetById(Guid id)
+        public async Task<Result<Product>> Get(string id)
         {
-            var product = _products.FirstOrDefault(p => p.Id.Value == id);
+            var product = _products.FirstOrDefault(p => p.Id.Value == Guid.Parse(id));
 
             if(product is null)
             {
@@ -40,6 +41,11 @@ namespace ZoomMap.Infra.InMemoryRepositories
         }
 
         public async Task<Result<bool>> Update(Product entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Result<Product>> IAbstractUpdateRepository<Product>.Update(Product entity)
         {
             throw new NotImplementedException();
         }

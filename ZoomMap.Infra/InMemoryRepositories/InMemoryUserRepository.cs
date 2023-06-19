@@ -2,6 +2,7 @@
 using ZoomMap.Domain.Common.Validation.ErrorBase;
 using ZoomMap.Domain.UserAggregate;
 using ZoomMap.Domain.Common.Validation.Errors;
+using ZoomMap.Application.Interfaces.Data.IAbstractRepositories;
 
 namespace ZoomMap.Infra.InMemoryRepositories
 {
@@ -36,6 +37,21 @@ namespace ZoomMap.Infra.InMemoryRepositories
         }
 
         public async Task<Result<bool>> Update(User entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Result<User>> Get(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Result<User>> IAbstractUpdateRepository<User>.Update(User entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Result<User>> IAbstractAddRepository<User>.Add(User entity)
         {
             throw new NotImplementedException();
         }

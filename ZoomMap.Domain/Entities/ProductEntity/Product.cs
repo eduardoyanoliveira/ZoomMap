@@ -39,5 +39,21 @@ namespace ZoomMap.Domain.Entities.ProductEntity
             return _validationMediator.ValidateBatch( product );
 
         }
+
+        public static Result<Product> Create(
+            string productId,
+            string name,
+            double price
+        )
+        {
+            ProductId id = ProductId.FromString<ProductId>(productId);
+            Product product = new Product(
+                id,
+                name,
+                price
+            );
+
+            return _validationMediator.ValidateBatch(product);
+        }
     }
 }

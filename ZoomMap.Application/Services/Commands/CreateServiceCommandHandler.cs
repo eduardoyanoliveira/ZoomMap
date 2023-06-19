@@ -42,7 +42,7 @@ namespace ZoomMap.Application.Services.Commands
 
             Service service = serviceCreationResult.GetValue();
 
-            Result<bool> persistUserReulst = await _serviceRepository.Add(service);
+            Result<Service> persistUserReulst = await _serviceRepository.Add(service);
             if (persistUserReulst.IsFailure)
             {
                 return Result<ServiceResult>.Fail(Errors.Database.InsertError);

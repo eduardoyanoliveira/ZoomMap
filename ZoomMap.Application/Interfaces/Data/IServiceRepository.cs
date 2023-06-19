@@ -1,8 +1,12 @@
-﻿using ZoomMap.Domain.Entities.ServiceEntity;
+﻿using ZoomMap.Application.Interfaces.Data.IAbstractRepositories;
+using ZoomMap.Domain.Entities.ServiceEntity;
 
 namespace ZoomMap.Application.Interfaces.Data
 {
-    public interface IServiceRepository : IRepository<Service>
+    public interface IServiceRepository : 
+        IAbstractFilterRepository<Service>,
+        IAbstractUpdateRepository<Service>,
+        IAbstractAddRepository<Service>
     {
 
     }

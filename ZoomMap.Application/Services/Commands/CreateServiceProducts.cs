@@ -1,7 +1,6 @@
 ﻿using ZoomMap.Application.Interfaces.Data;
 using ZoomMap.Application.Services.Common;
 using ZoomMap.Domain.Common.Validation.ErrorBase;
-using ZoomMap.Domain.Entities.ProductEntity;
 using ZoomMap.Domain.Entities.ServiceEntity.ValueObjects;
 
 namespace ZoomMap.Application.Services.Commands
@@ -21,7 +20,7 @@ namespace ZoomMap.Application.Services.Commands
 
             foreach (var serviceProductRequest in serviceProductRequests)
             {
-                var productResult = await _productRepository.GetById(Guid.Parse(serviceProductRequest.ProductId));
+                var productResult = await _productRepository.Get(serviceProductRequest.ProductId);
                 if (productResult.IsFailure) return Result<List<ServiceProduct>>.Fail(productResult.Error);
 
                 var serviceProductResult = ServiceProduct.Create(

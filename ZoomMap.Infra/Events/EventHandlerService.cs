@@ -1,5 +1,7 @@
-﻿using ZoomMap.Application.Interfaces.Events;
+﻿using ZoomMap.Application.Events.DomainEventHandlers.ServiceHandlers;
+using ZoomMap.Application.Interfaces.Events;
 using ZoomMap.Domain.Common.Events;
+using ZoomMap.Domain.Entities.ProductEntity.DomainEvents;
 
 namespace ZoomMap.Infra.Events
 {
@@ -12,12 +14,11 @@ namespace ZoomMap.Infra.Events
         {
             // Initialize handler subscriptions
 
-            //var customerCreatedHandlers = new List<Func<IHandler<CustomerCreatedEvent>>>
+            //var productPriceChangedEventHandlers = new List<Func<IHandler<ProductPriceChangedEvent>>>
             //{
-            //    () => new CustomerCreatedEmailNotificationHandler(),
-            //    () => new CustomerCreatedBillingHandler()
+            //    () => new ServiceHandlerProductPriceChangedEvent(),
             //};
-            //_handlerLists[typeof(CustomerCreatedEvent)] = new HandlerList<CustomerCreatedEvent>(customerCreatedHandlers);
+            //_handlerLists[typeof(ProductPriceChangedEvent)] = new HandlerList<ProductPriceChangedEvent>(productPriceChangedEventHandlers);
 
             //var orderPlacedHandlers = new List<IHandler<OrderPlacedEvent>>
             //{

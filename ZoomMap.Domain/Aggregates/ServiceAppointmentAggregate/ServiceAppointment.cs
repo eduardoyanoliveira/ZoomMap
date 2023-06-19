@@ -2,7 +2,6 @@
 using ZoomMap.Domain.Entities.CustomerEntity.ValueObjects;
 using ZoomMap.Domain.Entities.ServiceEntity.ValueObjects;
 using ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate.ValueObjects;
-using ZoomMap.Domain.Entities.ServiceEntity.DomainEvents;
 
 namespace ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate
 {
@@ -68,12 +67,6 @@ namespace ZoomMap.Domain.Aggregates.ServiceAppointmentAggregate
             }
 
             return detachedProductsTotal;
-        }
-
-        // Handle the domain event
-        public void Handle(ServiceTotalCalculatedEvent domainEvent)
-        {
-           _serviceTotalPrice = domainEvent.TotalPrice; 
         }
     }
 }

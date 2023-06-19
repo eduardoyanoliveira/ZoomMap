@@ -35,5 +35,18 @@
         {
             return Equals((object?)other);
         }
+
+        public static T FromString<T>(string value) where T : ValueObject
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            Guid parsedGuid = Guid.Parse(value);
+            T instance = (T)Activator.CreateInstance(typeof(T), parsedGuid);
+
+            return instance;
+        }
     }
 }

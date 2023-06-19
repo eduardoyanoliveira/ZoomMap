@@ -16,5 +16,6 @@ namespace ZoomMap.Domain.Entities.ProductEntity.ValueObjects
         {
             yield return Value;
         }
+
     }
 }
